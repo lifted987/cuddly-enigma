@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NewsAnime turns global news into clear, cinematic anime stories.">
+  <title>NewsAnime | The World, Reimagined as Anime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="2.css">
+</head>
+<body>
+  <section class="auth-screen" id="authScreen" aria-labelledby="authTitle">
+    <div class="auth-card">
+      <a class="brand auth-brand" href="#home" aria-label="NewsAnime home"><span class="brand-mark">✦</span>News<span>Anime</span></a>
+      <div class="auth-copy"><p class="kicker">YOUR DAILY STORY UNIVERSE</p><h1 id="authTitle">The world is waiting.</h1><p>Sign in to save stories, follow trending news, and experience headlines as anime.</p></div>
+      <div class="auth-tabs" role="tablist" aria-label="Account access"><button class="auth-tab active" id="signInTab" type="button" role="tab" aria-selected="true">Sign in</button><button class="auth-tab" id="signUpTab" type="button" role="tab" aria-selected="false">Create account</button></div>
+      <form class="auth-form" id="authForm"><label class="auth-name-field" for="authName" hidden>Full name</label><input class="auth-name-field" id="authName" type="text" placeholder="Full name" autocomplete="name" hidden><label for="authEmail">Email address</label><input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email" required><label for="authPassword">Password</label><input id="authPassword" type="password" placeholder="At least 6 characters" minlength="6" autocomplete="current-password" required><button class="auth-submit" id="authSubmit" type="submit">Sign in</button><p class="auth-message" id="authMessage" role="status" aria-live="polite"></p></form>
+      <div class="auth-divider"><span>or continue with</span></div><div class="social-auth" aria-label="Social sign in options"><button type="button" data-social="GitHub"><b>GH</b> GitHub</button><button type="button" data-social="Google"><b>G</b> Google</button><button type="button" data-social="Facebook"><b>f</b> Facebook</button></div><small class="auth-note">Demo mode: no real account or password is sent anywhere.</small>
+    </div><div class="auth-art" aria-hidden="true"><span>✦</span><strong>FACTS</strong><strong>MEET</strong><strong>FICTION</strong></div>
+  </section>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="NewsAnime home"><span class="brand-mark">✦</span>News<span>Anime</span></a>
+    <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
+      <a class="active" href="#home" data-nav="home">Home</a>
+      <a href="#news" data-nav="news">News</a>
+      <a href="#anime" data-nav="anime">Anime</a>
+      <a href="#trending" data-nav="trending">Trending</a>
+      <a href="#saved" data-nav="saved">Saved <b id="savedCount">0</b></a>
+      <a href="#profile" data-nav="profile">Profile</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle theme">◐</button>
+      <button class="profile-button" id="profileButton" type="button" aria-expanded="false">NA</button>
+      <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+    <div class="profile-popover" id="profilePopover" hidden>
+      <div class="profile-heading"><span class="profile-avatar">NA</span><div><strong>News Explorer</strong><small>Demo account</small></div></div>
+      <button type="button" data-profile-action="saved">♡ <span>Saved stories</span><b id="profileSavedCount">0</b></button>
+      <button type="button" data-profile-action="preferences">⚙ <span>Preferences</span></button>
+      <button type="button" data-profile-action="signout">↪ <span>Sign out</span></button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy"><p class="kicker">GLOBAL NEWS · ANIME STORIES</p><h1>The World,<br><em>Reimagined as Anime.</em></h1><p>Turn today's global news into immersive anime-style stories—while keeping every fact clear.</p>
+        <form class="search-form" id="searchForm"><span>⌕</span><input id="searchInput" type="search" placeholder="Search news, countries or topics..." aria-label="Search news"><button type="submit">Search</button></form>
+        <div class="hero-links"><a href="#news">🌍 Browse global news</a><a href="#trending">🔥 Trending stories</a></div>
+      </div><div class="hero-art" aria-hidden="true"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="hero-scan">EPISODE 01<br><b>THE WORLD WATCHES</b></div></div>
+    </section>
+
+    <section class="category-row" aria-label="News categories">
+      <button class="category active" data-category="All">🌎 All</button><button class="category" data-category="World">🌍 World</button><button class="category" data-category="Politics">🏛 Politics</button><button class="category" data-category="Business">💰 Business</button><button class="category" data-category="Technology">💻 Technology</button><button class="category" data-category="Sports">⚽ Sports</button><button class="category" data-category="Science">🔬 Science</button><button class="category" data-category="Climate">🌱 Climate</button>
+    </section>
+
+    <section class="content-section" id="news"><div class="section-title"><div><p class="kicker">CURATED FOR YOU</p><h2>Latest News</h2></div><span id="resultSummary">10 demo stories</span></div>
+      <div class="filter-bar"><select id="regionFilter" aria-label="Filter by region"><option value="All">All regions</option><option>Africa</option><option>Europe</option><option>Asia</option><option>North America</option><option>South America</option><option>Oceania</option></select><select id="timeFilter" aria-label="Filter by time"><option value="All">Any time</option><option value="Today">Today</option><option value="Week">This week</option></select><select id="sortFilter" aria-label="Sort stories"><option value="latest">Latest</option><option value="popular">Most popular</option></select></div>
+      <div class="story-grid" id="storyGrid"></div><div class="empty-state" id="emptyState" hidden><span>◌</span><h3>No news stories found.</h3><p>Try another topic, country, or category.</p></div>
+    </section>
+
+    <section class="feature-section" id="anime"><div><p class="kicker">FACTS MEET FICTION</p><h2>Every headline has a story.</h2><p>Read a factual summary, then experience a creative visual adaptation. Anime scenes are fictional representations—not real footage.</p><button class="primary-button" data-open-first>Watch a demo story →</button></div><div class="feature-card"><span>CREATIVE VISUALIZATION</span><strong>Scene 03</strong><small>THE IMPACT</small></div></section>
+    <section class="content-section" id="trending"><div class="section-title"><div><p class="kicker">🔥 MOST WATCHED</p><h2>Trending Worldwide</h2></div></div><div class="trending-list" id="trendingList"></div></section>
+    <section class="content-section saved-section" id="saved"><div class="section-title"><div><p class="kicker">YOUR LIBRARY</p><h2>Saved Stories</h2></div></div><div class="story-grid" id="savedGrid"></div><p class="saved-empty" id="savedEmpty">Save a story to find it here later.</p></section>
+    <section class="profile-section" id="profile" aria-labelledby="profileTitle"><div class="profile-shell"><div class="profile-intro"><div class="profile-photo" id="profilePhoto">NE</div><div><p class="kicker">YOUR STORY PROFILE</p><h2 id="profileTitle">News Explorer</h2><p>Personalize your account and keep your saved anime stories close.</p></div></div><form class="profile-form" id="profileForm"><label>Profile picture<input id="profilePicture" type="file" accept="image/*"></label><label>Name<input id="profileName" type="text" placeholder="Your name"></label><label>Email<input id="profileEmail" type="email" placeholder="you@example.com"></label><label>Phone number<input id="profilePhone" type="tel" placeholder="+234 800 000 0000"></label><label>Location<input id="profileLocation" type="text" placeholder="Lagos, Nigeria"></label><button class="primary-button" type="submit">Save profile</button><p id="profileMessage" aria-live="polite"></p></form></div></section>
+  </main>
+
+  <footer><a class="brand" href="#home"><span class="brand-mark">✦</span>News<span>Anime</span></a><p>Real facts. Imaginative worlds.</p><small>© 2026 NewsAnime · Demo data for illustration</small></footer>
+
+  <div class="modal-backdrop" id="storyModal" hidden><article class="story-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="close-button" id="closeModal" aria-label="Close">×</button><div class="modal-content"><div class="fact-panel"><span class="label factual">FACTUAL NEWS</span><h2 id="modalTitle"></h2><p id="modalFact"></p><dl><div><dt>Source</dt><dd id="modalSource"></dd></div><div><dt>Location</dt><dd id="modalLocation"></dd></div><div><dt>Published</dt><dd id="modalDate"></dd></div></dl><a id="sourceLink" href="#" target="_blank" rel="noopener">Read original article ↗</a></div><div class="anime-panel"><div class="viewer" id="viewer"><span class="label creative">CREATIVE ANIME VISUALIZATION</span><span class="scene-number" id="sceneNumber">SCENE 01</span><div class="viewer-content"><h3 id="sceneTitle"></h3><p id="sceneText"></p></div><div class="viewer-controls"><button id="previousScene" type="button">◀</button><button class="play-button" id="playButton" type="button">▶ Play</button><button id="nextScene" type="button">▶</button></div><div class="progress"><span id="progressBar"></span></div></div><p class="disclaimer">Anime scenes are a creative visualization of the reported event, not authentic news footage.</p></div></div></article></div>
+  <nav class="bottom-nav" aria-label="Mobile navigation"><a class="active" href="#home">⌂<small>Home</small></a><a href="#news">▣<small>News</small></a><a href="#anime">▶<small>Anime</small></a><a href="#saved">♡<small>Saved</small></a><a href="#profile">◯<small>Profile</small></a></nav>
+  <style>
+    .auth-card{border-color:#ffffff2b;background:linear-gradient(145deg,#151a35f5,#0d1228f5);box-shadow:0 25px 90px #0009,0 0 0 1px #8b5cf622}.auth-brand{font-size:24px}.auth-tabs{border:1px solid #ffffff12}.social-auth button{min-height:74px;background:linear-gradient(145deg,#1b2340,#11172c);transition:.25s;position:relative;overflow:hidden}.social-auth button:after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent,#ffffff14,transparent);transform:translateX(-100%);transition:.4s}.social-auth button:hover:after{transform:translateX(100%)}.social-auth button b{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:#ffffff14}.social-auth button[data-social="Google"] b{color:#fbbf24}.social-auth button[data-social="Facebook"] b{background:#2563eb;color:#fff}.social-auth button[data-social="GitHub"] b{background:#000;color:#fff}.auth-submit{box-shadow:0 8px 22px #6366f155}.profile-section{max-width:1180px;margin:auto;padding:65px 22px 80px}.profile-shell{display:grid;grid-template-columns:minmax(240px,1fr) minmax(320px,540px);gap:35px;align-items:center;padding:38px;border:1px solid #ffffff16;border-radius:24px;background:linear-gradient(135deg,#171633,#111a32);box-shadow:var(--shadow)}.profile-intro{display:flex;align-items:center;gap:17px}.profile-photo{width:86px;height:86px;border-radius:25px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--cyan));background-size:cover;background-position:center;font:700 25px 'Space Grotesk';box-shadow:0 0 30px #6366f155}.profile-intro h2{font:700 30px 'Space Grotesk';margin:6px 0}.profile-intro p:not(.kicker){color:var(--muted);line-height:1.6;margin:0}.profile-form{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:18px;border:1px solid #ffffff16;border-radius:15px;background:#080b1866}.profile-form label{display:grid;gap:6px;color:var(--muted);font-size:11px;font-weight:700}.profile-form label:first-child{grid-column:1/-1}.profile-form input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:#080b18;color:var(--text);outline-color:var(--cyan)}.profile-form .primary-button{grid-column:1/-1}.profile-form p{grid-column:1/-1;min-height:16px;color:var(--cyan);font-size:12px;margin:0}@media(max-width:760px){.profile-section{padding:42px 20px 65px}.profile-shell{display:block;padding:23px}.profile-form{margin-top:23px;grid-template-columns:1fr}.profile-form label:first-child,.profile-form .primary-button,.profile-form p{grid-column:auto}}
+  </style>
+  <script src="2.js"></script>
+</body>
+</html>
