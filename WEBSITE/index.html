@@ -1,43 +1,411 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Discover sample restaurants, menus and food prices around Port Harcourt.">
+  <meta name="description" content="Discover restaurants, menus and food prices around Port Harcourt.">
   <title>PH EATS | Find your next meal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pheats-enhancements.css">
 </head>
 <body>
-  <header class="topbar"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon">🍽</span><span>PH <b>EATS</b></span></a><nav class="desktop-nav" aria-label="Primary navigation"><a class="active" href="index.html"><i>01</i>Home</a><a href="explore.html"><i>02</i>Explore</a><a href="map.html"><i>03</i>Map</a><a href="favorites.html"><i>04</i>Favorites <span id="favoriteCount">0</span></a><a href="#profile"><i>05</i>Profile</a></nav><button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button><div class="profile-wrap"><button class="profile-dot" id="profileButton" aria-label="Open profile" aria-expanded="false">PA</button><div class="profile-menu" id="profileMenu" hidden><div class="profile-card"><span class="profile-large">PA</span><div><strong>Port Harcourt foodie</strong><small>Guest account</small></div></div><a href="favorites.html">♡ Saved restaurants <b id="profileFavoriteCount">0</b></a><a href="explore.html">⌕ Discover restaurants</a><button id="profileSignIn" type="button">Sign in to sync favorites</button></div></div></div><nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation"><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="map.html">Map</a><a href="favorites.html">Favorites</a><a href="#profile">Profile</a></nav></header>
 
-  <main id="home">
-    <section class="profile-section" id="profile" aria-label="Profile"><div class="profile-section-inner"><div class="profile-identity"><div class="profile-photo" id="profilePhoto">PA</div><div><p class="kicker green">Your food profile</p><h2 id="profileDisplayName">Port Harcourt foodie</h2><p>Personalize your profile and keep your local food discoveries together.</p></div></div><form class="profile-form" id="profileForm"><label>Profile picture<input id="profilePicture" type="file" accept="image/*"></label><label>Name<input id="profileName" type="text" placeholder="Your name"></label><label>Email<input id="profileEmail" type="email" placeholder="you@example.com"></label><label>Phone number<input id="profilePhone" type="tel" placeholder="+234 800 000 0000"></label><label>Location<input id="profileLocation" type="text" placeholder="Port Harcourt, Rivers State"></label><button class="primary-button" type="submit">Save profile</button><p class="profile-save-message" id="profileSaveMessage" aria-live="polite"></p></form><a class="outline-button" href="#favorites">View saved restaurants</a></div></section>
-    <section class="hero"><div class="hero-inner"><div class="hero-copy"><p class="kicker"><span></span> Made for the Garden City</p><h1>Find the best food in <em>Port Harcourt.</em></h1><p class="hero-subtitle">Discover restaurants, compare menus and prices, check ratings, and find great food near you.</p><form class="search-bar" id="searchForm"><span class="search-symbol">⌕</span><input id="searchInput" type="search" placeholder="Search restaurants, food, or area..." aria-label="Search restaurants, food, or area"><button class="location-button" id="locationButton" type="button">⌖ <span>Use my location</span></button><button class="search-button" type="submit">Search</button></form><p class="location-status" id="locationStatus" aria-live="polite"></p><div class="popular"><span>Try searching</span><button data-query="Jollof">Jollof</button><button data-query="GRA">GRA</button><button data-query="Suya">Suya</button><button data-query="Seafood">Seafood</button></div></div><div class="hero-art" aria-hidden="true"><div class="art-card art-card-back">🍲<small>Local favourites</small></div><div class="art-card art-card-front"><div class="food-photo"></div><strong>What are you craving?</strong><small>Fresh ideas from around town</small></div></div></div></section>
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="nav-wrap">
+      <button class="brand" data-nav="home"><span class="brand-icon">🍽</span><span>PH <b>EATS</b></span></button>
+      
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <button class="nav-link active" data-nav="home">Home</button>
+        <button class="nav-link" data-nav="explore">Explore</button>
+        <button class="nav-link" data-nav="map">Map</button>
+        <button class="nav-link" data-nav="favorites">Favorites <span id="favoriteCount">0</span></button>
+        <button class="nav-link" data-nav="profile">Profile</button>
+      </nav>
 
-    <section class="content-wrap" id="explore"><div class="section-head"><div><p class="kicker green">Explore Port Harcourt</p><h2>Restaurants near you</h2></div><p class="result-count" id="resultCount">Showing 8 restaurants</p></div><div class="category-row"><button class="category active" data-cuisine="all">🍴 All food</button><button class="category" data-cuisine="Nigerian">🍚 Nigerian</button><button class="category" data-cuisine="Fast Food">🍔 Fast food</button><button class="category" data-cuisine="Seafood">🦐 Seafood</button><button class="category" data-cuisine="BBQ/Grills">🔥 Grills</button><button class="category" data-cuisine="Continental">🥗 Continental</button></div><div class="explore-layout"><aside class="filters"><div class="filter-title"><strong>Filter results</strong><button id="clearFilters" type="button">Clear all</button></div><label>Location<select id="locationFilter"><option value="all">All Port Harcourt</option><option>GRA</option><option>Trans Amadi</option><option>Woji</option><option>Rumuola</option><option>Rumuokoro</option><option>Choba</option><option>Eliozu</option><option>D-Line</option><option>Other areas</option></select></label><label>Rating<select id="ratingFilter"><option value="0">Any rating</option><option value="4.5">4.5+ stars</option><option value="4">4.0+ stars</option><option value="3.5">3.5+ stars</option></select></label><label>Price range<select id="priceFilter"><option value="all">Any price</option><option value="3000">Under ₦3,000</option><option value="5000">₦3,000 - ₦5,000</option><option value="10000">₦5,000 - ₦10,000</option><option value="10001">₦10,000+</option></select></label><label>Cuisine<select id="cuisineFilter"><option value="all">All cuisines</option><option>Nigerian</option><option>Fast Food</option><option>Chinese</option><option>Indian</option><option>Italian</option><option>Continental</option><option>Seafood</option><option>Local Food</option><option>BBQ/Grills</option></select></label><label class="check-label"><input id="openFilter" type="checkbox"> Open now only</label></aside><div class="results-area"><div class="sort-row"><span id="demoNotice">Demo directory: prices, ratings and hours are sample data.</span><label>Sort by <select id="sortFilter"><option value="recommended">Recommended</option><option value="rating">Highest rated</option><option value="price">Cheapest</option><option value="distance">Closest</option><option value="reviews">Most reviewed</option></select></label></div><div class="restaurant-grid" id="restaurantGrid"></div><div class="empty-state" id="emptyState" hidden><div>🍽</div><h3>No restaurants found</h3><p>Try searching for another food, restaurant, or Port Harcourt area.</p><button class="outline-button" id="emptyClear" type="button">Clear filters</button></div></div></div></section>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      
+      <div class="profile-wrap">
+        <button class="profile-dot" id="profileButton" aria-label="Open profile" aria-expanded="false">PA</button>
+        <div class="profile-menu" id="profileMenu" hidden>
+          <div class="profile-card">
+            <span class="profile-large">PA</span>
+            <div>
+              <strong>Port Harcourt foodie</strong>
+              <small>Guest account</small>
+            </div>
+          </div>
+          <button class="menu-link" data-nav="favorites">♡ Saved restaurants <b id="profileFavoriteCount">0</b></button>
+          <button class="menu-link" data-nav="explore">⌕ Discover restaurants</button>
+          <button id="profileSignIn" type="button">Sign in to sync favorites</button>
+        </div>
+      </div>
+    </div>
+    
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <button class="nav-link" data-nav="home">Home</button>
+      <button class="nav-link" data-nav="explore">Explore</button>
+      <button class="nav-link" data-nav="map">Map</button>
+      <button class="nav-link" data-nav="favorites">Favorites</button>
+      <button class="nav-link" data-nav="profile">Profile</button>
+    </nav>
+  </header>
 
-    <section class="map-section" id="map"><div class="map-copy"><p class="kicker green">Find your way around</p><h2>Good food is closer than you think.</h2><p>Explore our sample restaurant locations across Port Harcourt. A live map can be connected here later with Google Maps, Mapbox, or OpenStreetMap.</p><button class="primary-button" id="mapLocation" type="button">⌖ Use my location</button></div><div class="map-placeholder"><div class="map-grid"></div><div class="map-road road-one"></div><div class="map-road road-two"></div><div class="map-label label-gra">GRA Phase 2</div><div class="map-label label-woji">Woji</div><div class="map-label label-trans">Trans Amadi</div><div class="map-label label-rum">Rumuola</div><button class="map-pin pin-one" data-map-pin="1">🍴<span>The Garden Grill<br>★ 4.9 · ₦4,500</span></button><button class="map-pin pin-two" data-map-pin="2">🍴<span>Riverside Kitchen<br>★ 4.7 · ₦3,800</span></button><button class="map-pin pin-three" data-map-pin="3">🍴<span>Chop House<br>★ 4.8 · ₦2,500</span></button><div class="map-legend">◎ Port Harcourt dining guide</div></div></section>
-    <section class="favorites-section" id="favorites"><div class="section-head"><div><p class="kicker green">Your food board</p><h2>Favourite foods</h2></div><p id="favoriteSummary">0 saved restaurants</p></div><div class="favorite-grid" id="favoriteGrid"></div><div class="favorite-empty" id="favoriteEmpty"><span>♡</span><h3>Your favourite foods will appear here</h3><p>Tap the heart on any restaurant to build your personal food board.</p><a class="outline-button" href="#explore">Discover restaurants</a></div></section>
+  <!-- MAIN CONTENT -->
+  <main id="app-viewport">
+
+    <!-- HOME VIEW -->
+    <section id="view-home" class="app-view active">
+      
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="kicker">Made for the Garden City</p>
+            <h1>Find the best food in <em>Port Harcourt.</em></h1>
+            <p class="hero-subtitle">Discover restaurants, compare menus and prices, check ratings, and find great food near you.</p>
+
+            <form class="search-bar" id="searchForm">
+              <span class="search-symbol">⌕</span>
+              <input id="searchInput" type="search" placeholder="Search restaurants, food, or area..." aria-label="Search restaurants">
+              <button class="location-button" id="locationButton" type="button">⌖ Use my location</button>
+              <button class="search-button" type="submit">Search</button>
+            </form>
+
+            <p class="location-status" id="locationStatus" aria-live="polite"></p>
+            <div class="popular">
+              <span>Try searching</span>
+              <button data-query="Jollof">Jollof</button>
+              <button data-query="GRA">GRA</button>
+              <button data-query="Suya">Suya</button>
+              <button data-query="Seafood">Seafood</button>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-card art-card-back">🍲<small>Local favourites</small></div>
+            <div class="art-card art-card-front">
+              <div class="food-photo"></div>
+              <strong>What are you craving?</strong>
+              <small>Fresh ideas from around town</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-section" id="profile" style="display:none;">
+        <div class="profile-section-inner">
+          <div class="profile-identity">
+            <div class="profile-photo" id="profilePhoto">PA</div>
+            <div>
+              <p class="kicker green">Your food profile</p>
+              <h2 id="profileDisplayName">Port Harcourt foodie</h2>
+              <p>Personalize your profile and keep your local food discoveries together.</p>
+            </div>
+          </div>
+          <form class="profile-form" id="profileForm">
+            <label>Profile picture<input id="profilePicture" type="file" accept="image/*"></label>
+            <label>Name<input id="profileName" type="text" placeholder="Your name"></label>
+            <label>Email<input id="profileEmail" type="email" placeholder="you@example.com"></label>
+            <label>Phone number<input id="profilePhone" type="tel" placeholder="+234 800 000 0000"></label>
+            <label>Location<input id="profileLocation" type="text" placeholder="Port Harcourt, Rivers State"></label>
+            <button class="primary-button" type="submit">Save profile</button>
+            <p class="profile-save-message" id="profileSaveMessage" aria-live="polite"></p>
+          </form>
+          <a class="outline-button" href="favorites.html">View saved restaurants</a>
+        </div>
+      </section>
+
+      <section class="content-wrap" id="explore-preview">
+        <div class="section-head">
+          <div>
+            <p class="kicker green">Explore Port Harcourt</p>
+            <h2>Restaurants near you</h2>
+          </div>
+          <p class="result-count" id="resultCount">Showing 8 restaurants</p>
+        </div>
+        <div class="category-row">
+          <button class="category active" data-cuisine="all">🍴 All food</button>
+          <button class="category" data-cuisine="Nigerian">🍚 Nigerian</button>
+          <button class="category" data-cuisine="Fast Food">🍔 Fast food</button>
+          <button class="category" data-cuisine="Seafood">🦐 Seafood</button>
+          <button class="category" data-cuisine="BBQ/Grills">🔥 Grills</button>
+          <button class="category" data-cuisine="Continental">🥗 Continental</button>
+        </div>
+        <div class="restaurant-grid" id="restaurantGrid"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <h3>No restaurants found</h3>
+          <p class="text-muted">Try adjusting your filters.</p>
+        </div>
+      </section>
+
+      <section class="map-section" id="map-preview">
+        <div class="map-copy">
+          <p class="kicker green">Find your way around</p>
+          <h2>Good food is closer than you think.</h2>
+          <p>Explore our sample restaurant locations across Port Harcourt. A live map can be connected here later with Google Maps, Mapbox, or OpenStreetMap.</p>
+          <button class="primary-button" id="mapLocation" type="button">⌖ Use my location</button>
+        </div>
+        <div class="map-placeholder">
+          <div class="map-grid"></div>
+          <div class="map-road road-one"></div>
+          <div class="map-road road-two"></div>
+          <div class="map-label label-gra">GRA Phase 2</div>
+          <div class="map-label label-woji">Woji</div>
+          <div class="map-label label-trans">Trans Amadi</div>
+          <div class="map-label label-rum">Rumuola</div>
+          <button class="map-pin pin-one" data-map-pin="1">🍴<span>The Garden Grill<br>★ 4.9 · ₦4,500</span></button>
+          <button class="map-pin pin-two" data-map-pin="2">🍴<span>Riverside Kitchen<br>★ 4.7 · ₦3,800</span></button>
+          <button class="map-pin pin-three" data-map-pin="3">🍴<span>Chop House<br>★ 4.8 · ₦2,500</span></button>
+          <div class="map-legend">◎ Port Harcourt dining guide</div>
+        </div>
+      </section>
+    </section>
+
+    <!-- EXPLORE VIEW -->
+    <section id="view-explore" class="app-view">
+      <div class="container section-padding">
+        <div class="section-head">
+          <div>
+            <p class="kicker green">Explore Port Harcourt</p>
+            <h2>Restaurants near you</h2>
+          </div>
+          <p class="result-count" id="resultCount">Showing 8 restaurants</p>
+        </div>
+        <div class="explore-layout">
+          <aside class="filters">
+            <div class="filter-title">
+              <strong>Filter results</strong>
+              <button id="clearFilters" type="button">Clear all</button>
+            </div>
+            <label>Location<select id="locationFilter">
+              <option value="all">All Port Harcourt</option>
+              <option>GRA</option>
+              <option>Trans Amadi</option>
+              <option>Woji</option>
+              <option>Rumuola</option>
+              <option>Rumuokoro</option>
+              <option>Choba</option>
+              <option>Eliozu</option>
+              <option>D-Line</option>
+              <option>Other areas</option>
+            </select></label>
+            <label>Rating<select id="ratingFilter">
+              <option value="0">Any rating</option>
+              <option value="4.5">4.5+ stars</option>
+              <option value="4">4.0+ stars</option>
+              <option value="3.5">3.5+ stars</option>
+            </select></label>
+            <label>Price range<select id="priceFilter">
+              <option value="all">Any price</option>
+              <option value="3000">Under ₦3,000</option>
+              <option value="5000">₦3,000 - ₦5,000</option>
+              <option value="10000">₦5,000 - ₦10,000</option>
+              <option value="10001">₦10,000+</option>
+            </select></label>
+            <label>Cuisine<select id="cuisineFilter">
+              <option value="all">All cuisines</option>
+              <option>Nigerian</option>
+              <option>Fast Food</option>
+              <option>Chinese</option>
+              <option>Indian</option>
+              <option>Italian</option>
+              <option>Continental</option>
+              <option>Seafood</option>
+              <option>Local Food</option>
+              <option>BBQ/Grills</option>
+            </select></label>
+            <label class="check-label"><input id="openFilter" type="checkbox"> Open now</label>
+          </aside>
+          <div>
+            <div class="sort-row">
+              <label>Sort by<select id="sortFilter">
+                <option value="recommended">Recommended</option>
+                <option value="rating">Rating</option>
+                <option value="price">Price</option>
+                <option value="distance">Distance</option>
+                <option value="reviews">Reviews</option>
+              </select></label>
+            </div>
+            <div class="restaurant-grid" id="restaurantGrid"></div>
+            <div id="emptyState" class="empty-state" hidden>
+              <h3>No restaurants found</h3>
+              <p class="text-muted">Try adjusting your filters.</p>
+              <button id="emptyClear" class="btn btn-primary mt-4">Clear all filters</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP VIEW -->
+    <section id="view-map" class="app-view">
+      <div class="container section-padding">
+        <h2>Map View Coming Soon</h2>
+        <p>Interactive map feature will be available here.</p>
+      </div>
+    </section>
+
+    <!-- FAVORITES VIEW -->
+    <section id="view-favorites" class="app-view">
+      <div class="container section-padding">
+        <div class="section-head">
+          <div>
+            <p class="kicker green">Your food board</p>
+            <h2>Favourite foods</h2>
+          </div>
+          <p id="favoriteSummary">0 saved restaurants</p>
+        </div>
+        <div class="favorite-grid" id="favoriteGrid"></div>
+        <div class="favorite-empty" id="favoriteEmpty">
+          <span>♡</span>
+          <h3>Your favourite foods will appear here</h3>
+          <p>Tap the heart on any restaurant to build your personal food board.</p>
+          <a class="outline-button" href="explore.html">Discover restaurants</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE VIEW -->
+    <section id="view-profile" class="app-view">
+      <div class="container section-padding">
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="avatar-placeholder" id="profilePhotoDisplay">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div>
+              <h2 id="profile-name">Port Harcourt foodie</h2>
+              <p id="profile-email" class="text-muted">Guest account</p>
+            </div>
+          </div>
+          <hr class="divider">
+          <div class="profile-sections">
+            <div class="profile-item">
+              <strong>Saved Restaurants:</strong> <span id="profile-fav-count">0</span>
+            </div>
+            <div class="profile-item">
+              <strong>Primary Location:</strong> <span id="profile-location-display">Port Harcourt</span>
+            </div>
+            <div class="profile-item">
+              <strong>Settings:</strong> Notifications Enabled
+            </div>
+          </div>
+          <hr class="divider">
+          <h3>Edit Profile</h3>
+          <form class="profile-form" id="profileForm">
+            <label>Profile picture<input id="profilePicture" type="file" accept="image/*"></label>
+            <label>Name<input id="profileName" type="text" placeholder="Your name"></label>
+            <label>Email<input id="profileEmail" type="email" placeholder="you@example.com"></label>
+            <label>Phone number<input id="profilePhone" type="tel" placeholder="+234 800 000 0000"></label>
+            <label>Location<input id="profileLocation" type="text" placeholder="Port Harcourt, Rivers State"></label>
+            <button class="btn btn-primary" type="submit">Save profile</button>
+            <p class="profile-save-message" id="profileSaveMessage" aria-live="polite"></p>
+          </form>
+          <button class="btn btn-secondary mt-4" id="logout-btn">Log out</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESTAURANT DETAIL VIEW -->
+    <section id="view-restaurant-detail" class="app-view">
+      <div id="restaurant-detail-container"></div>
+    </section>
+
   </main>
 
-  <footer class="footer"><div><a class="brand light" href="#home"><span class="brand-icon">🍽</span><span>PH <b>EATS</b></span></a><p>Local food discoveries for every kind of appetite.</p></div><div class="footer-links"><a href="#explore">Explore restaurants</a><a href="#map">Map</a><a href="#">Contact</a><a href="#">Privacy</a></div><div class="footer-bottom"><span>© 2026 PH EATS</span><span>Demo directory for Port Harcourt, Rivers State 🇳🇬</span></div></footer>
-  <nav class="bottom-nav"><a class="active" href="#home"><span>⌂</span>Home</a><a href="#explore"><span>⌕</span>Explore</a><a href="#map"><span>⌖</span>Map</a><a href="#favorites"><span>♡</span>Saved</a></nav>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>
+      <a class="brand light" href="#home"><span class="brand-icon">🍽</span><span>PH <b>EATS</b></span></a>
+      <p>Local food discoveries for every kind of appetite.</p>
+    </div>
+    <div class="footer-links">
+      <a href="explore.html">Explore restaurants</a>
+      <a href="map.html">Map</a>
+      <a href="mailto:hello@pheats.example">Contact</a>
+      <a href="index.html#privacy">Privacy</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PH EATS</span>
+      <span>Demo directory for Port Harcourt, Rivers State 🇳🇬</span>
+    </div>
+  </footer>
 
-  <div class="modal-backdrop" id="modalBackdrop" hidden><article class="restaurant-modal" role="dialog" aria-modal="true" aria-labelledby="modalName"><button class="modal-close" id="modalClose" aria-label="Close details">×</button><div class="modal-hero" id="modalHero"></div><div class="modal-content"><div class="modal-heading"><div><p class="kicker green">Sample restaurant profile</p><h2 id="modalName"></h2><p id="modalMeta"></p></div><button class="heart-button" id="modalFavorite" aria-label="Save restaurant">♡</button></div><div class="modal-rating" id="modalRating"></div><p class="modal-about" id="modalAbout"></p><div class="modal-details"><span>🕘 <strong id="modalHours"></strong></span><span>☎ <strong id="modalPhone"></strong></span></div><div class="menu-heading"><h3>Menu</h3><span>Sample/demo prices</span></div><div class="menu-list" id="menuList"></div><h3 class="review-heading">Customer reviews</h3><div class="reviews"><div><b>“</b><p>Lovely portions and quick service. The local dishes taste homemade.</p><strong>Amaka O. · ★★★★★</strong></div><div><b>“</b><p>Great spot for a casual meal around Port Harcourt.</p><strong>Chidi E. · ★★★★☆</strong></div></div><div class="modal-actions"><button class="primary-button" type="button">⌖ Get directions</button><button class="outline-button" type="button">☎ Call</button><button class="whatsapp-button" type="button">◉ WhatsApp</button></div></div></article></div>
-  <style>
-    .profile-wrap{position:relative;margin-left:auto}.profile-menu{position:absolute;right:0;top:49px;width:255px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:var(--shadow);z-index:8}.profile-menu[hidden]{display:none}.profile-card{display:flex;align-items:center;gap:10px;padding:9px;border-bottom:1px solid var(--line);margin-bottom:5px}.profile-card strong,.profile-card small{display:block}.profile-card small{color:var(--muted);font-size:11px;margin-top:3px}.profile-large{width:42px;height:42px;border-radius:50%;background:#f2c779;color:#4c3015;display:grid;place-items:center;font-weight:800;flex:0 0 auto}.profile-menu a,.profile-menu>button{display:block;width:100%;border:0;background:none;text-align:left;padding:11px 9px;border-radius:7px;color:var(--ink);font-size:12px;cursor:pointer}.profile-menu a:hover,.profile-menu>button:hover{background:var(--lime);color:var(--green)}.profile-menu a b{float:right;color:var(--green)}.profile-section{display:block;background:#f5faef;padding:27px 24px;border-bottom:1px solid var(--line)}.profile-section-inner{max-width:1220px;margin:auto;display:flex;align-items:center;gap:17px}.profile-section-inner h2{font-size:25px}.profile-section-inner p:not(.kicker){color:var(--muted);margin:7px 0 0}.profile-section-inner .outline-button{margin-left:auto}.location-pill{display:flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid #d9e8db;border-radius:10px;background:#f4fbf4;color:var(--green);font-size:16px;transition:.25s}.location-pill:hover{border-color:#99c7a3;transform:translateY(-1px)}.location-pill small,.location-pill strong{display:block}.location-pill small{font-size:9px;color:#789181;font-weight:600}.location-pill strong{font-size:11px}.network-status{display:flex;align-items:center;gap:6px;margin-left:auto;color:var(--green);font:700 10px monospace;letter-spacing:1px}.network-status span{width:7px;height:7px;border-radius:50%;background:#36a05a;box-shadow:0 0 0 4px #36a05a22;animation:navPulse 1.8s infinite}.network-status small{color:#7d9084;font-size:8px;letter-spacing:.7px}.desktop-nav a i{font-style:normal;font:700 9px monospace;color:#9cb0a2;margin-right:5px;opacity:.7}.desktop-nav a:hover i,.desktop-nav a.active i{color:var(--green);opacity:1}.desktop-nav a.active{color:var(--green)}.desktop-nav a.active:after{width:100%}@keyframes navPulse{50%{opacity:.45;transform:scale(.7)}}@media(max-width:950px){.network-status{display:none}.location-pill{margin-left:auto}.desktop-nav{display:none}}@media(max-width:650px){.profile-section{padding:24px 19px}.profile-section-inner{align-items:flex-start;flex-wrap:wrap}.profile-section-inner .outline-button{margin-left:59px}.profile-menu{position:fixed;right:14px;top:58px;width:min(255px,calc(100vw - 28px))}.location-pill{display:none}}
-  </style>
-  <style>
-    .profile-section{background:linear-gradient(135deg,#f5faef,#edf8f4)}.profile-section-inner{display:grid;grid-template-columns:minmax(230px,1fr) minmax(300px,520px) auto;align-items:center;gap:28px}.profile-identity{display:flex;align-items:center;gap:15px}.profile-photo{width:76px;height:76px;border-radius:24px;background:linear-gradient(135deg,#176d49,#75bd83);background-size:cover;background-position:center;display:grid;place-items:center;color:white;font:800 24px 'Plus Jakarta Sans';box-shadow:0 10px 22px #176d4926}.profile-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:17px;background:#ffffffb8;border:1px solid #d7e8db;border-radius:14px;box-shadow:0 8px 25px #176d4910}.profile-form label{display:grid;gap:5px;color:#718078;font-size:11px;font-weight:700}.profile-form label:first-child{grid-column:1/-1}.profile-form input{width:100%;padding:9px 10px;border:1px solid #dce8df;border-radius:7px;background:#fff;color:var(--ink);outline-color:var(--green);font-size:12px}.profile-form .primary-button{grid-column:1/-1}.profile-save-message{grid-column:1/-1;color:var(--green);font-size:11px;margin:0;min-height:14px}.favorites-section{max-width:1180px;margin:auto;padding:58px 24px 70px}.favorite-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.favorite-card{display:flex;gap:13px;align-items:center;padding:12px;background:#fff;border:1px solid var(--line);border-radius:11px;box-shadow:0 3px 12px #193d2808}.favorite-card-image{width:76px;height:76px;border-radius:8px;background:center/cover;flex:0 0 auto}.favorite-card h3{font-size:15px;letter-spacing:-.5px;margin:0 0 4px}.favorite-card p{font-size:11px;color:var(--muted);margin:0 0 7px}.favorite-card .remove-favorite{margin-left:auto;align-self:flex-start;border:0;background:none;color:#d65e50;font-size:18px}.favorite-empty{text-align:center;padding:35px 20px;color:var(--muted)}.favorite-empty span{font-size:37px;color:var(--green)}.favorite-empty h3{color:var(--ink);font-size:20px;margin:9px 0 5px}.favorite-empty p{margin:0 0 15px;font-size:13px}@media(max-width:950px){.profile-section-inner{grid-template-columns:1fr}.profile-section-inner>.outline-button{justify-self:start}.favorite-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.profile-section-inner{display:block}.profile-form{margin-top:20px;grid-template-columns:1fr}.profile-form label:first-child,.profile-form .primary-button,.profile-save-message{grid-column:auto}.profile-section-inner>.outline-button{display:inline-block;margin-top:17px}.favorite-grid{grid-template-columns:1fr}.favorites-section{padding:45px 18px 55px}}
-  </style>
+  <!-- BOTTOM NAV (Mobile) -->
+  <nav class="bottom-nav">
+    <a class="active" href="index.html" data-nav="home"><span>⌂</span>Home</a>
+    <a href="explore.html" data-nav="explore"><span>⌕</span>Explore</a>
+    <a href="map.html" data-nav="map"><span>⌖</span>Map</a>
+    <a href="favorites.html" data-nav="favorites"><span>♡</span>Saved</a>
+  </nav>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <article class="restaurant-modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+      <button class="modal-close" id="modalClose" aria-label="Close details">×</button>
+      <div class="modal-hero" id="modalHero"></div>
+      <div class="modal-content">
+        <div class="modal-heading">
+          <div>
+            <p class="kicker green">Sample restaurant profile</p>
+            <h2 id="modalName"></h2>
+            <p id="modalMeta"></p>
+          </div>
+          <button class="heart-button" id="modalFavorite" aria-label="Save restaurant">♡</button>
+        </div>
+        <div class="modal-rating" id="modalRating"></div>
+        <p class="modal-about" id="modalAbout"></p>
+        <div class="modal-details">
+          <span>🕘 <strong id="modalHours"></strong></span>
+          <span>☎ <strong id="modalPhone"></strong></span>
+        </div>
+        <div class="menu-heading">
+          <h3>Menu</h3>
+          <span>Sample/demo prices</span>
+        </div>
+        <div class="menu-list" id="menuList"></div>
+        <h3 class="review-heading">Customer reviews</h3>
+        <div class="reviews">
+          <div>
+            <b>"</b>
+            <p>Lovely portions and quick service. The local dishes taste homemade.</p>
+            <strong>Amaka O. · ★★★★★</strong>
+          </div>
+          <div>
+            <b>"</b>
+            <p>Great spot for a casual meal around Port Harcourt.</p>
+            <strong>Chidi E. · ★★★★☆</strong>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="primary-button" type="button">⌖ Get directions</button>
+          <button class="outline-button" type="button">☎ Call</button>
+          <button class="whatsapp-button" type="button">◉ WhatsApp</button>
+        </div>
+      </div>
+    </article>
+  </div>
+
   <script src="script.js"></script>
   <script>
     function renderFavouriteFoods(){const favoriteGrid=document.querySelector('#favoriteGrid');const favoriteEmpty=document.querySelector('#favoriteEmpty');const favoriteSummary=document.querySelector('#favoriteSummary');const saved=restaurants.filter(r=>state.favorites.includes(r.id));favoriteGrid.innerHTML=saved.map(r=>`<article class="favorite-card"><div class="favorite-card-image" style="background-image:url('${r.image}')"></div><div><h3>${r.name}</h3><p>★ ${r.rating} · ${r.area}</p><strong>${money(r.price)} meals from</strong></div><button class="remove-favorite" data-remove-favorite="${r.id}" aria-label="Remove ${r.name} from favourite foods">×</button></article>`).join('');favoriteEmpty.hidden=saved.length>0;favoriteSummary.textContent=`${saved.length} saved restaurant${saved.length===1?'':'s'}`}
-    function renderProfile(){const profile=state.profile||{};const name=profile.name||'Port Harcourt foodie';document.querySelector('#profileDisplayName').textContent=name;document.querySelector('#profileName').value=profile.name||'';document.querySelector('#profileEmail').value=profile.email||'';document.querySelector('#profilePhone').value=profile.phone||'';document.querySelector('#profileLocation').value=profile.location||'';document.querySelector('#profilePhoto').textContent=(name.match(/[A-Z]/gi)||['P','A']).slice(0,2).join('').toUpperCase();if(profile.photo)document.querySelector('#profilePhoto').style.backgroundImage=`url('${profile.photo}')`}
-    function renderExtras(){renderFavouriteFoods();renderProfile()}function wrapRender(){const baseRender=render;return function(){baseRender();renderExtras()}}render=wrapRender();renderExtras();document.querySelector('#favoriteGrid').addEventListener('click',e=>{const button=e.target.closest('[data-remove-favorite]');if(!button)return;state.favorites=state.favorites.filter(id=>id!==Number(button.dataset.removeFavorite));localStorage.setItem('ph-eats-favorites',JSON.stringify(state.favorites));render()});document.querySelector('#profileForm').addEventListener('submit',e=>{e.preventDefault();state.profile={...state.profile,name:document.querySelector('#profileName').value.trim(),email:document.querySelector('#profileEmail').value.trim(),phone:document.querySelector('#profilePhone').value.trim(),location:document.querySelector('#profileLocation').value.trim()};localStorage.setItem('ph-eats-profile',JSON.stringify(state.profile));renderProfile();document.querySelector('#profileSaveMessage').textContent='Profile saved on this device.'});document.querySelector('#profilePicture').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.addEventListener('load',()=>{state.profile.photo=reader.result;localStorage.setItem('ph-eats-profile',JSON.stringify(state.profile));renderProfile();document.querySelector('#profileSaveMessage').textContent='Profile picture updated.'});reader.readAsDataURL(file)});
+    function renderProfile(){const profile=state.profile||{};const name=profile.name||'Port Harcourt foodie';const email=profile.email||'Guest account';const location=profile.location||'Port Harcourt';document.querySelector('#profileDisplayName').textContent=name;document.querySelector('#profileName').value=profile.name||'';document.querySelector('#profileEmail').value=profile.email||'';document.querySelector('#profilePhone').value=profile.phone||'';document.querySelector('#profileLocation').value=profile.location||'';const avatar=(name.match(/[A-Z]/gi)||['P','A']).slice(0,2).join('').toUpperCase();document.querySelectorAll('#profilePhoto').forEach(el=>{if(profile.photo){el.style.backgroundImage=`url('${profile.photo}')`;el.textContent=''}else{el.textContent=avatar}});const displayPhoto=document.querySelector('#profilePhotoDisplay');if(displayPhoto){if(profile.photo){displayPhoto.style.backgroundImage=`url('${profile.photo}')`;displayPhoto.innerHTML=''}else{displayPhoto.innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>'}}document.querySelector('#profile-name').textContent=name;document.querySelector('#profile-email').textContent=email;document.querySelector('#profile-location-display').textContent=location;document.querySelector('#profile-fav-count').textContent=state.favorites.length}
+    function renderExtras(){renderFavouriteFoods();renderProfile()}
+    function wrapRender(){const baseRender=render;return function(){baseRender();renderExtras()}}
+    render=wrapRender();renderExtras();
+    document.querySelector('#favoriteGrid').addEventListener('click',e=>{const button=e.target.closest('[data-remove-favorite]');if(!button)return;state.favorites=state.favorites.filter(id=>id!==Number(button.dataset.removeFavorite));localStorage.setItem('ph-eats-favorites',JSON.stringify(state.favorites));render()});
+    document.querySelector('#profileForm').addEventListener('submit',e=>{e.preventDefault();state.profile={...state.profile,name:document.querySelector('#profileName').value.trim(),email:document.querySelector('#profileEmail').value.trim(),phone:document.querySelector('#profilePhone').value.trim(),location:document.querySelector('#profileLocation').value.trim()};localStorage.setItem('ph-eats-profile',JSON.stringify(state.profile));renderProfile();document.querySelector('#profileSaveMessage').textContent='Profile saved on this device.'});
+    document.querySelector('#profilePicture').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.addEventListener('load',()=>{state.profile.photo=reader.result;localStorage.setItem('ph-eats-profile',JSON.stringify(state.profile));renderProfile();document.querySelector('#profileSaveMessage').textContent='Profile picture updated.'});reader.readAsDataURL(file)});
+    document.querySelector('#logout-btn').addEventListener('click',()=>{state.profile={};state.favorites=[];localStorage.removeItem('ph-eats-profile');localStorage.removeItem('ph-eats-favorites');renderProfile();document.querySelector('#favoriteGrid').innerHTML='';switchView('home')});
+    document.querySelectorAll('[data-cuisine]').forEach(button=>button.addEventListener('click',()=>{const cuisine=button.dataset.cuisine;window.location.href=`explore.html${cuisine==='all'?'':`?cuisine=${encodeURIComponent(cuisine)}`}`}));
+    document.querySelectorAll('[data-map-pin]').forEach(button=>button.addEventListener('click',()=>{window.location.href=`map.html#restaurant-${button.dataset.mapPin}`}));
+    document.querySelectorAll('.modal-actions button').forEach(button=>button.addEventListener('click',()=>{const restaurant=document.querySelector('#modalName').textContent;const phone=document.querySelector('#modalPhone').textContent.replace(/[^+\d]/g,'');if(button.classList.contains('outline-button'))window.location.href=`tel:${phone}`;else if(button.classList.contains('whatsapp-button'))window.location.href=`https://wa.me/${phone.replace('+','')}`;else window.location.href=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${restaurant}, Port Harcourt`)}`}));
   </script>
 </body>
 </html>
